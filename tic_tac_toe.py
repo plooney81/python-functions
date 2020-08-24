@@ -288,7 +288,7 @@ tic_grid = check_move(comp_row_val, comp_col_val, tic_grid, "O")
 # we call the check_winner function to see if anyboy has won yet
 is_there_a_winner = check_winner(tic_grid)
 
-# while loop that keeps on calling another move until someone has won
+# while loop that keeps on calling another player move or another computer move until someone has won
 while True:
     if is_there_a_winner == 0:
         tic_grid = another_player_move(tic_grid)
