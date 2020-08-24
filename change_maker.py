@@ -35,10 +35,10 @@ def is_it_number(bill_val):
             print(f'\nInvalid input, please type in a number that is larger than the total bill of ${bill_val}')
 
 # takes the payment minus the bill_val and then calls specific functions that get the bills tuple and then another that gets the coins tuple
-def make_change(payment, bill_val):
-    total_change = payment - bill_val
-    bills = []
-    coins = []
+# def make_change(payment, bill_val):
+    # total_change = payment - bill_val
+    # bills = []
+    # coins = []
 
 
 
