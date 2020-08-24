@@ -25,6 +25,7 @@ def smallest_numb(some_list):
 print('\nPlease input a number for the upper and lower bounds of the random number generator')
 user_input = is_it_integer()
 
+# prompt the user for the length of our random number list
 print('\nPlease input a number for the length of the list')
 list_length = is_it_integer()
 
