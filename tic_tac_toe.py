@@ -100,6 +100,8 @@ def check_move(row, col, list_param, char):
 
 # this function will check if there is a winner, if there is then it will print out the winner, if not then the code continues to ask for inputs
 def check_winner(list_param):
+    # initialize a dummy variable that keeps track of if anybody won
+    dummy_var = 0
     # set a few variables so we don't have to keep putting those strings for the following checks
     comp_move = '__O__|'
     player_move = '__X__|'
@@ -111,16 +113,20 @@ def check_winner(list_param):
         if list_param[x][y] == list_param[x][y+1]:
             if list_param[x][y] == comp_move and list_param[x][y+2] == comp_2_move:
                 print('The computer has won')
+                dummy_var += 1
             elif list_param[x][y] == player_move and list_param[x][y+2] == player_2_move:
                 print('Congratulations you have won!')
+                dummy_var += 1
     # the we check the columns
     for y in range(3):
         x = 0
         if list_param[x][y] == list_param[x+1][y] and list_param[x+2][y] == list_param[x][y]:
             if list_param[x][y] == comp_move or comp_2_move:
                 print('The computer has won')
+                dummy_var += 1
             elif list_param[x][y] == player_move or player_2_move:
                 print('Congratulations you have won!')
+                dummy_var += 1
     # then we check the diagonals
     for x in range(3):
         y = 0
@@ -128,10 +134,46 @@ def check_winner(list_param):
             if list_param[x][y] == list_param[x+1][y+1]:
                 if list_param[x][y] == comp_move and list_param[x+2][y+2] == comp_2_move:
                     print('The computer has won')
+                    dummy_var += 1
                 elif list_param[x][y] == player_move and list_param[x+2][y+2] == player_2_move:
                     print('Congratulations you have won!')
+                    dummy_var += 1
+    # we return the dummy_var
+    return dummy_var
 
-            
+def another_move(list_param):
+    # we then print out the computers move
+    print('\nThe computer generated move is:')
+    print_grid()
+
+    # Ask the user for another input
+    print('\nInput another row index')
+    row_val = is_it_integer()
+
+    # ask for the user to input our column index
+    print('\nInput another column index')
+    col_val = is_it_integer()
+
+    # calls our tic_grid function that returns an updated tic_grid given we feed it the current row_val, col_val, and tic_grid as parameters
+    # we then save the return value back to our tic_grid list
+    # call check move
+    list_param = check_move(row_val, col_val, list_param, "X")
+
+    print_grid()
+
+    # generate a random number for the computers row index value, assign it to a variable named comp_row_val
+    comp_row_val = random.randint(0,2)
+
+    # generate a random number for the computers column index value, assign it to a variable named comp_col_val
+    comp_col_val = random.randint(0,2)
+
+    # call check move
+    list_param = check_move(comp_row_val, comp_col_val, list_param, "O")
+
+    print('\nThe computer generated move is:')
+    print_grid()
+
+    return list_param
 
 # end function part of code
 # ------------------------------------------------------------------------------------------------------
@@ -262,6 +304,11 @@ print('\nThe computer generated move is:')
 print_grid()
 
 # now we need a block that checks if anybody has won yet, will write here and then convert into a function so we can call it later on
-
-
-# possibly get another block that makes the cpmuter moves smart instead of just random, still tyring to think of the logic that could make this happen.
+# we call the check_winner function to see if anyboy has won yet
+is_there_a_winner = check_winner(tic_grid)
+while True:
+    if is_there_a_winner == 0:
+        tic_grid = another_move(tic_grid)
+        is_there_a_winner = check_winner(tic_grid)
+    else:
+        break
