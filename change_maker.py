@@ -40,7 +40,8 @@ def is_it_number(bill_val):
     # bills = []
     # coins = []
 
-
+# END FUNCTION SECTION
+#-----------------------------------------------------------------------------------------------
 
 # first we will get our random float for the bill or total_charge
 total_charge = round(random.random()*100, 2)
