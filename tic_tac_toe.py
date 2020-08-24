@@ -130,6 +130,7 @@ def check_winner(list_param):
     # then we check the diagonals
     for x in range(3):
         y = 0
+        # top left to bottom right
         if x == 0:
             if list_param[x][y] == list_param[x+1][y+1]:
                 if list_param[x][y] == comp_move and list_param[x+2][y+2] == comp_2_move:
@@ -138,6 +139,16 @@ def check_winner(list_param):
                 elif list_param[x][y] == player_move and list_param[x+2][y+2] == player_2_move:
                     print('Congratulations you have won!\n')
                     dummy_var += 1
+        # bottom left to top right
+        if x == 2:
+            if list_param[x][y] == list_param[x-1][y+1]:
+                if list_param[x][y] == comp_move and list_param[x-2][y+2] == comp_2_move:
+                    print('The computer has won\n')
+                    dummy_var += 1
+                elif list_param[x][y] == player_move and list_param[x-2][y+2] == player_2_move:
+                    print('Congratulations you have won!\n')
+                    dummy_var += 1
+                
     # we return the dummy_var
     return dummy_var
 
