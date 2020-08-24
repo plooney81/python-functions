@@ -152,7 +152,7 @@ def check_winner(list_param):
     # we return the dummy_var
     return dummy_var
 
-def another_move(list_param):
+def another_player_move(list_param):
     # we then print out the computers move
     print('\nThe computer generated move is:')
     print_grid()
@@ -165,13 +165,14 @@ def another_move(list_param):
     print('\nInput another column index')
     col_val = is_it_integer()
 
-    # calls our tic_grid function that returns an updated tic_grid given we feed it the current row_val, col_val, and tic_grid as parameters
+    # calls our check_move function that returns an updated tic_grid given we feed it the current row_val, col_val, and tic_grid as parameters
     # we then save the return value back to our tic_grid list
     # call check move
     list_param = check_move(row_val, col_val, list_param, "X")
 
-    print_grid()
+    return list_param
 
+def another_computer_move(list_param):
     # generate a random number for the computers row index value, assign it to a variable named comp_row_val
     comp_row_val = random.randint(0,2)
 
@@ -183,8 +184,8 @@ def another_move(list_param):
 
     print('\nThe computer generated move is:')
     print_grid()
-
     return list_param
+
 
 # end function part of code
 # ------------------------------------------------------------------------------------------------------
@@ -290,7 +291,12 @@ is_there_a_winner = check_winner(tic_grid)
 # while loop that keeps on calling another move until someone has won
 while True:
     if is_there_a_winner == 0:
-        tic_grid = another_move(tic_grid)
+        tic_grid = another_player_move(tic_grid)
         is_there_a_winner = check_winner(tic_grid)
+        if is_there_a_winner == 0:
+            tic_grid = another_computer_move(tic_grid)
+            is_there_a_winner = check_winner(tic_grid)
+        else:
+            break
     else:
         break
