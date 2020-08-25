@@ -144,6 +144,8 @@ def value_of_change(made_change):
 #-----------------------------------------------------------------------------------------------
 
 # first we will get our random float for the bill or total_charge
+# the random.random() function returns a value between 0.0 and 1.0 in float, so we multiply it by 
+# 100 so we can get from 0.0 to 100 in float data type instead
 total_charge = round(random.random()*100, 2)
 
 # then we will get our user input for the payment
