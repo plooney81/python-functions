@@ -128,6 +128,7 @@ def value_of_change(made_change):
                 elif columns == 5:
                     value_total += made_change[rows][columns] * 100
             # the second index of the tuple are the coins part
+            # index 0 corresponds to pennies, 1--> nickels, 2--> dimes, 3-->quarters
             if rows == 1:
                 if columns == 0:
                     value_total += made_change[rows][columns] * 0.01
