@@ -42,11 +42,18 @@ def make_change(coin_payment, bills_payment):
     coins = make_coins_change(coin_payment)
     return (bills, coins)
 
-
+# function that decides how many bills to give as change
 def make_bills_change(bills_change):
     # initiate an empty bills_list
     bills_list = [0, 0, 0, 0, 0, 0]
+    # while loop that runs until our bills_change loop gets to zero, for every bill we add 
+    # to one of the bills_list indeces during the below code, we take off that bills value from
+    # bills_change...until it gets to zero
     while bills_change != 0:
+        # if we have more than 100 dollars in our bills change variable,
+        # we add one to the 100 dollar index in our bills list, and subsequently 
+        # take off 100 from bills change...same process is repeated for all available bills
+        # down to a dollar
         if bills_change >= 100:
             bills_list[-1] += 1
             bills_change -= 100
@@ -65,12 +72,16 @@ def make_bills_change(bills_change):
         elif bills_change >= 1:
             bills_list[-6] += 1
             bills_change -= 1
-    return bills_list
+    # we ultimately want the final list to be converted into a tuple, the tuple() function will
+    # conver our bills_list into a tuple for us
+    return tuple(bills_list)
 
 def make_coins_change(coins_change):
     # initiate an empty coins_list
     coins_list = [0, 0, 0, 0]
     rounded_coins = round(coins_change, 2)
+    # while loop that runs until our rounded_coins variable goes down to zero, this entire function works very similarly
+    # to the make_bills_change function, if curious about logical steps, read the comments for that function
     while rounded_coins != 0.00:
         if rounded_coins >= 0.25:
             coins_list[-1] += 1
@@ -84,10 +95,14 @@ def make_coins_change(coins_change):
         elif rounded_coins >= 0.01:
             coins_list[-4] += 1
             rounded_coins -= 0.01
+        # without this last elif statement below, was getting some very odd numbers even though we rounded it up top,
+        # was making it to where we would never actually get the rounded_coins variable down to acutal 0.00, the 
+        # code below takes care of that
         elif rounded_coins < 0.01:
             rounded_coins = 0.00
             coins_list[-4] += 1
-    return coins_list
+    # return our coins_list converted to a tuple
+    return tuple(coins_list)
 
 # END FUNCTION SECTION
 #-----------------------------------------------------------------------------------------------
@@ -113,4 +128,5 @@ coins_charge = round(coins_charge, 2)
 # call the make_change function with the bills_charge and coins_charge as the parameters
 answer = make_change(coins_charge, bills_charge)
 
-print(answer)
+# print out the answer nicely
+print(f'\nOur change tuple is:\n{answer}')
