@@ -104,6 +104,41 @@ def make_coins_change(coins_change):
     # return our coins_list converted to a tuple
     return tuple(coins_list)
 
+# functiont that calculates the amount of change given a two dimensional tuple
+def value_of_change(made_change):
+    # initiate a variable to keep track of the total value
+    value_total = 0
+    for rows in range(len(made_change)):
+        for columns in range(len(made_change[rows])):
+            # the first index of the tuple are the bills
+            if rows == 0:
+                # index 0 corresponds to dollar bills, 1 --> $5, 2 --> $10, 3 --> $20, 4 --> $50, 5 --> $100
+                # so if the columns index is equal to that those respective numbers then we multiply the number
+                # in the tuple by the value for that index
+                if columns == 0:
+                    value_total += made_change[rows][columns] * 1
+                elif columns == 1:
+                    value_total += made_change[rows][columns] * 5
+                elif columns == 2:
+                    value_total += made_change[rows][columns] * 10
+                elif columns == 3:
+                    value_total += made_change[rows][columns] * 20
+                elif columns == 4:
+                    value_total += made_change[rows][columns] * 50
+                elif columns == 5:
+                    value_total += made_change[rows][columns] * 100
+            # the second index of the tuple are the coins part
+            if rows == 1:
+                if columns == 0:
+                    value_total += made_change[rows][columns] * 0.01
+                elif columns == 1:
+                    value_total += made_change[rows][columns] * 0.05
+                elif columns == 2:
+                    value_total += made_change[rows][columns] * 0.10
+                elif columns == 3:
+                    value_total += made_change[rows][columns] * 0.25
+    # now we return the variable we have been using to keep track of all the total money
+    return round(value_total, 2)
 # END FUNCTION SECTION
 #-----------------------------------------------------------------------------------------------
 
@@ -128,5 +163,6 @@ coins_charge = round(coins_charge, 2)
 # call the make_change function with the bills_charge and coins_charge as the parameters
 answer = make_change(coins_charge, bills_charge)
 
-# print out the answer nicely
-print(f'\nOur change tuple is:\n{answer}')
+# print out the answers nicely
+print(f'\nOur change tuple is:\n{answer}\nWhich is ${value_of_change(answer)}')
+
